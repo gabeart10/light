@@ -7,21 +7,25 @@ GPIO.setmode(GPIO.BCM)
 pins = [17,27,22,5,6,13,19,26]
 set_num = 0
 num = 0
+set_num2 = 0
 off_num = 0
 GPIO.setwarnings(False)
-
 for item in pins:
    GPIO.setup(pins[set_num], GPIO.OUT)
    set_num += 1
 GPIO.setup(24, GPIO.IN)
+
 try:
    while True:
-      current_binary = 0
-      current_pin = 0
       inputValue = GPIO.input(24)
       if inputValue == True or num == 254:
          speed = input("What Speed?\n")
+         for item2 in pins:
+            GPIO.output(pins[set_num2], 0)
+            set_num2 += 1
          for num in range(255):
+            current_binary = 0
+            current_pin = 0
             binary = list(bin(num)[:1:-1])
             for z in pins:
                GPIO.output(pins[off_num], 0)
@@ -46,7 +50,8 @@ try:
             inputValue = GPIO.input(24)
             if inputValue == True:
                print(c.blue + "Let Go!" + c.reset)
-               exit(1)
+               time.sleep(1.5)
+               break
             for o in range(repeat_times):
                GPIO.output(pins[current_pin], int(binary[current_binary]))
                current_binary += 1
