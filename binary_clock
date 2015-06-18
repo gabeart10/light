@@ -18,11 +18,12 @@ GPIO.setup(24, GPIO.IN)
 try:
    while True:
       inputValue = GPIO.input(24)
+      for item2 in pins:
+         GPIO.output(pins[set_num2], 0)
+         set_num2 += 1
+      set_num2 = 0
       if inputValue == True or num == 254:
          speed = input("What Speed?\n")
-         for item2 in pins:
-            GPIO.output(pins[set_num2], 0)
-            set_num2 += 1
          for num in range(255):
             current_binary = 0
             current_pin = 0
