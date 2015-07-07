@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+import color_tools as ct
+import RPi.GPIO as GPIO
+import colors as c
+
+pins = [13,19,26]
+
+ct.all_out(pins)
+ct.all_off(pins)
+
+try:
+    while True:
+        color = input("What color?(Blue,Green,Red,White,Magenta,Yellow,and Cyan)\n").strip().lower()
+
+        if color == "blue":
+            GPIO.output(13, 1)
+            input("Continue?")      
+            GPIO.output(13, 0)
+ 
+        elif color == "green":
+            GPIO.output(19, 1)
+            input("Continue?")      
+            GPIO.output(19, 0)
+
+        elif color == "red":
+            GPIO.output(26, 1)
+            input("Continue?")      
+            GPIO.output(26, 0)
+        
+        elif color == "white":
+            GPIO.output(13, 1)
+            GPIO.output(19, 1)
+            GPIO.output(26, 1)
+            input("Continue?")      
+            GPIO.output(13, 0)
+            GPIO.output(19, 0)
+            GPIO.output(26, 0)
+   
+        elif color == "magenta":
+            GPIO.output(13, 1)
+            GPIO.output(26, 1)
+            input("Continue?")      
+            GPIO.output(13, 0)
+            GPIO.output(26, 0)
+  
+        elif color == "cyan":
+            GPIO.output(13, 1)
+            GPIO.output(19, 1)
+            input("Continue?")      
+            GPIO.output(13, 0)
+            GPIO.output(19, 0)
+
+        elif color == "yellow":
+            GPIO.output(26, 1)
+            GPIO.output(19, 1)
+            input("Continue?")      
+            GPIO.output(26, 0)
+            GPIO.output(19, 0)
+        else:
+            print("Not a Color!")
+        print(c.clear)
+ 
+except KeyboardInterrupt:
+    GPIO.cleanup()       
+            
+       
+       
