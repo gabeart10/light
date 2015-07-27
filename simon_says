@@ -4,7 +4,13 @@ import color_tools as ct
 import random as r
 import colors as c
 import time
+import pygame.mixer
 
+pygame.mixer.init(48000, -16, 1, 1024)
+sound = pygame.mixer.Sound("beep-02.wav")
+music = pygame.mixer.Sound("SuperSmashMouthBros-Final.wav")
+channelA = pygame.mixer.Channel(1)
+channelB = pygame.mixer.Channel(2)
 GPIO.setmode(GPIO.BCM)
 out_pins = [20,5,27,17,13,19,26]
 in_pins = [21,16,25,22]
@@ -13,7 +19,6 @@ for pin in in_pins:
     GPIO.setup(pin, GPIO.IN)
 colors = ['r','b','g','y']
 ct.all_off(out_pins)
-
 try:
     while True:
         color = []
@@ -51,24 +56,28 @@ try:
             for h in color:
                 doing = 1
                 while doing == 1:
-                    if GPIO.input(22) == False:
+                    if GPIO.input(22) == True:
                         your_color.append('r')
                         print(c.red + "RED" + c.reset)
+                        channelA.play(sound)
                         doing = 0
                         time.sleep(1)
-                    elif GPIO.input(25) == False:
+                    elif GPIO.input(25) == True:
                         your_color.append('b')
                         print(c.blue + "BLUE" + c.reset)
+                        channelA.play(sound)
                         doing = 0
                         time.sleep(1)
-                    elif GPIO.input(16) == False:
+                    elif GPIO.input(16) == True:
                         your_color.append('g')
                         print(c.green + "GREEN" + c.reset)
+                        channelA.play(sound)
                         doing = 0
                         time.sleep(1)
-                    elif GPIO.input(21) == False:
+                    elif GPIO.input(21) == True:
                         your_color.append('y')
                         print(c.yellow + "YELLOW" + c.reset)
+                        channelA.play(sound)
                         doing = 0
                         time.sleep(1)
 
