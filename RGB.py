@@ -1,16 +1,15 @@
-#!/usr/bin/env python3
 import RPi.GPIO as GPIO
 import time
 
-pins = [13,19,26]
+pins = [14,15,18]
 
 GPIO.setmode(GPIO.BCM)
 
 for pin in pins:
    GPIO.setup(pin, GPIO.OUT)
-p1 = GPIO.PWM(13, 50)
-p2 = GPIO.PWM(19, 50)
-p3 = GPIO.PWM(26, 50)
+p1 = GPIO.PWM(14, 50)
+p2 = GPIO.PWM(15, 50)
+p3 = GPIO.PWM(18, 50)
 
 p1.start(0)
 p2.start(0)
