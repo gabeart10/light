@@ -4,7 +4,7 @@ import time
 pins = [14,15,18]
 
 GPIO.setmode(GPIO.BCM)
-
+#Brown,Black,White,Gray
 for pin in pins:
    GPIO.setup(pin, GPIO.OUT)
 p1 = GPIO.PWM(14, 50)

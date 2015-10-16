@@ -3,11 +3,25 @@ import RPi.GPIO as GPIO
 import time
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(21, GPIO.OUT)
-GPIO.output(21, 1)
+GPIO.setup(21, GPIO.IN)
+GPIO.setup(20, GPIO.OUT)
+def how_far():
+  GPIO.output(20,1)
+  time.sleep(0.00001)
+  GPIO.output(20,0)
+  start = time.time()
+  
+  while GPIO.input(21)==0:
+    start = time.time()
+
+  while GPIO.input(21)==1:
+    stop = time.time()
+
+  elap = stop-start
+  dis = (elap * 34300)/2
+  
+  return dis
 
 while True:
-    value = GPIO.input(16)
-    print("Senser Value is:" + str(value))
-    time.sleep(1)
+  input('Do?\n')
+  print(how_far())

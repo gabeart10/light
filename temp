@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+def gettemp(id):
+  try:
+   mytemp = ''
+   filename = 'w1_slave'
+   f = open('/sys/bus/w1/devices/' + id + '/' + filename, 'r')
+   line = f.readline()
+   crc = line.rsplit(' ',1)
+   crc = crc[1].replace('\n', '')
+   if crc=='YES':
+     line = f.readline()
+     mytemp = line.rsplit('t=',1)
+

@@ -3,5 +3,9 @@ import RPi.GPIO as GPIO
 import time
 
 GPIO.setmode(GPIO.BCM)
-out_pins = [
-
+GPIO.setup(12, GPIO.OUT)
+while True:
+    GPIO.output(12, 1)
+    time.sleep(1)
+    GPIO.output(12, 0)
+    time.sleep(1)
