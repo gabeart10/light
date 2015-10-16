@@ -10,4 +10,5 @@ def gettemp(id):
    if crc=='YES':
      line = f.readline()
      mytemp = line.rsplit('t=',1)
-
+   else:
+     mytemp = 9999
