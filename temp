@@ -1,14 +1,23 @@
 #!/usr/bin/env python3
 def gettemp(id):
   try:
-   mytemp = ''
-   filename = 'w1_slave'
-   f = open('/sys/bus/w1/devices/' + id + '/' + filename, 'r')
-   line = f.readline()
-   crc = line.rsplit(' ',1)
-   crc = crc[1].replace('\n', '')
-   if crc=='YES':
-     line = f.readline()
-     mytemp = line.rsplit('t=',1)
-   else:
-     mytemp = 9999
+    mytemp = ''
+    filename = 'w1_slave'
+    f = open('/sys/bus/w1/devices/' + id + '/' + filename, 'r')
+    line = f.readline()
+    crc = line.rsplit(' ',1)
+    crc = crc[1].replace('\n', '')
+    if crc=='YES':
+      line = f.readline()
+      mytemp = line.rsplit('t=',1)
+    else:
+      mytemp = 9999
+    f.close()
+
+    return int(mytemp[1])
+  except:
+    return 9999 
+id = '28-0215011437ff'
+temp = '{:.3f}'.format(gettemp(id)/float(1000))
+temp = str(float(temp) * 9/5 + 32)
+print("Temp : " + temp + " F")
